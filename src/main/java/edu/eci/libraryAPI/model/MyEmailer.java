@@ -9,7 +9,11 @@ public class MyEmailer {
 	private static final String SMTP_HOST_NAME = "smtp.sendgrid.net";
 	private static final String SMTP_AUTH_USER = "CrkJohn";
     private static final String SMTP_AUTH_PWD = "Beverages17";
-
+    private String correo;
+    
+	public MyEmailer(String correo) {
+		this.correo = correo;
+	}
 
 	public void sendMessage() throws MessagingException {
 		Properties properties = new Properties();
@@ -29,7 +33,7 @@ public class MyEmailer {
 		multipart.addBodyPart(part1);
 		multipart.addBodyPart(part2);
 		message.setFrom(new InternetAddress("john.ibanez@mail.escuelaing.edu.co"));
-		message.addRecipient(Message.RecipientType.TO, new InternetAddress("jhonhrge@gmail.com"));
+		message.addRecipient(Message.RecipientType.TO, new InternetAddress(correo));
 		message.setSubject("Solicitud hecha");
 		message.setContent(multipart);
 		Transport transport = mailSession.getTransport();

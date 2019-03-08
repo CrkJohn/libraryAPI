@@ -88,8 +88,8 @@ public class InMemoryLibraryPersistence implements LibraryPersitence {
 	}
 
 	@Override
-	public void createHilo(int id, Libro bk) {
-		ThreadJohn threadJohn = new ThreadJohn(id, bk);
+	public void createHilo(int id, Libro bk, String correo) {
+		ThreadJohn threadJohn = new ThreadJohn(id, bk, correo);
 		threadJohn.start();
 	}
 
@@ -98,10 +98,11 @@ public class InMemoryLibraryPersistence implements LibraryPersitence {
 		private int id;
 		private Libro bk;
 		private MyEmailer  email;
-		public ThreadJohn(int id, Libro bk) {
+		
+		public ThreadJohn(int id, Libro bk, String correo) {
 			this.id = id;
 			this.bk = bk;
-			email = new MyEmailer();
+			email = new MyEmailer(correo);
 			
 		}
 
@@ -109,7 +110,6 @@ public class InMemoryLibraryPersistence implements LibraryPersitence {
 		public void run() {
 			try {
 				Thread.sleep(1000);
-				email.sendMessage();
 				if (librerias.containsKey(id)) {
 					librerias.get(id).getLibros().add(bk);
 				} else {
@@ -117,6 +117,8 @@ public class InMemoryLibraryPersistence implements LibraryPersitence {
 					libros.add(bk);
 					librerias.put(id, new Libreria(names[0], id, Direccion[1], Telefono[2], libros));
 				}
+				email.sendMessage();
+				
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			} catch (MessagingException e) {

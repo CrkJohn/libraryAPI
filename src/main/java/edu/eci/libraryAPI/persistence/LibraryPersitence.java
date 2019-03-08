@@ -12,7 +12,7 @@ public interface LibraryPersitence {
 	public Set<Libreria> getAllLibreria();
 	public List<Libro> getAllLibros(int libreria) throws LibraryPersistenceException;
 	public void deleteLibrary(int id) throws LibraryPersistenceException;
-	public void createHilo(int id, Libro bk);
+	public void createHilo(int id, Libro bk, String correo);
 	
 	
 }

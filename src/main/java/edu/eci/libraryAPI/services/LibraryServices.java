@@ -38,8 +38,8 @@ public class LibraryServices {
 
 
 
-	public void createHilo(int id, Libro bk) throws LibraryPersistenceException  {
-		libraryPersistence.createHilo(id,bk);
+	public void createHilo(int id, Libro bk, String correo) throws LibraryPersistenceException  {
+		libraryPersistence.createHilo(id,bk,correo);
 	}
 	 
 	 

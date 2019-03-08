@@ -70,13 +70,13 @@ public class LibraryAPIController {
 	
 	/*
 	 * 
-curl -i -X POST -HContent-Type:application/json -HAccept:application/json http://localhost:8080/libraries/0 -d '{"nombre":"LibroPruebaPostARSW0","id":0,"autor":"AutorARSW0","sinopsis":"Una historia que trata de Drama"}'
+curl -i -X POST -HContent-Type:application/json -HAccept:application/json http://localhost:8080/libraries/0/jhonhrge@gmail.com -d '{"nombre":"LibroPruebaPostARSW0","id":0,"autor":"AutorARSW0","sinopsis":"Una historia que trata de Drama"}'
 	 */
 	
-	@PostMapping("libraries/{id}")
-	public ResponseEntity<?> addBooks(@PathVariable  int id , @RequestBody Libro bk){
+	@PostMapping("libraries/{id}/{correo}")
+	public ResponseEntity<?> addBooks(@PathVariable  int id ,@PathVariable String correo,  @RequestBody Libro bk){
 		try {
-			libraryServices.createHilo(id,bk);
+			libraryServices.createHilo(id,bk,correo);
 			return new ResponseEntity<>(HttpStatus.ACCEPTED);
 		} catch (Exception ex){
 			if(ex.getMessage().equals("forbidden")) {
